@@ -157,7 +157,7 @@ jobs:
 
       - name: Run notebooks
         shell: bash -l {0}
-        run: pytest ./notebooks
+        run: pytest ./notebooks -m notebooks
 
       - name: Run widget tests without flights
         shell: bash -l {0}
