@@ -154,6 +154,10 @@ jobs:
         run: |
           conda install --yes --quiet pytorch torchvision captum cpuonly -c pytorch
 
+      - name: Run notebooks
+        shell: bash -l {0}
+        run: pytest ./notebooks
+
       - name: Run widget tests without flights
         shell: bash -l {0}
         run: |
