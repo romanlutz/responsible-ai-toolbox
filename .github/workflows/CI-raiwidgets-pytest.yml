@@ -99,16 +99,23 @@ jobs:
       #   run: find ./dist/ -name '*.whl' -exec pip install {} \;
       #   working-directory: responsibleai
 
-      # - name: Run notebook tests
-      #   shell: bash -l {0}
-      #   run: python -m pytest -s -v notebooks -m notebooks -k test_responsibleaidashboard_multiclass_dnn_model_debugging
-
+      
       - name: Run tests
         shell: bash -l {0}
         id: raiwidgettests
         run: |
           pytest ./tests/
         working-directory: ${{ matrix.packageDirectory }}
+
+      - name: Install pytorch
+        shell: bash -l {0}
+        run: |
+          conda install --yes --quiet pytorch torchvision captum cpuonly -c pytorch
+
+      - name: Run notebook tests
+        shell: bash -l {0}
+        run: python -m pytest -s -v notebooks -m notebooks -k test_responsibleaidashboard_multiclass_dnn_model_debugging
+
 
       - if: ${{ (steps.raiwidgettests.outcome == 'success') }}
         name: Upload code coverage results
