@@ -153,6 +153,7 @@ jobs:
         shell: bash -l {0}
         run: |
           conda install --yes --quiet pytorch torchvision captum cpuonly -c pytorch
+          conda install --yes charset-normalizer==3.2.0
 
       - name: Run notebooks
         shell: bash -l {0}
